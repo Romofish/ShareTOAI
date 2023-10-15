@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Test Syntax Highlighting</title>
+<link rel="stylesheet" href="./default.min.css">
+
+<script src="./highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+  $('pre code').each(function(i, block) {
+
+    hljs.highlightBlock(block);
+
+  });
+
+});
+
+</script>
+</head>
+<body class="export export-format-html export-engine-none">
+<div class="page-content">
+        <div dir="auto">
+
+    <h1 class="break-text" id="bkmrk-page-title">Test Syntax Highlighting</h1>
+
+    <div style="clear:left;"></div>
+
+            <p id="bkmrk-test-sas-syntax-high">Test SAS Syntax highlighting when exported in PDF or HTML</p>
+<pre id="bkmrk-%25macro-readin_pdt%28-f"><code class="javascript">
+
+import axios from 'axios';
+
+// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+    // const token = store.getState().session.token;
+    const token=localStorage.getItem("accessToken");
+    const serverip=localStorage.getItem("DEFAULT-SERVER-IP");
+    config.headers.Authorization =  token;
+    config.headers.common['ServerIP'] =  serverip;
+    return config;
+});
+
+// Add a response interceptor
+axios.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      alert("Respomse interceptor" + error.response.status);
+      if (error.response) {
+        if (error.response.status === 401 ) {
+        //   this.errorMessage = error.response.data.message;
+          alert(error.response.data.message); //console.log(error.response);
+          console.log(this.$router.currentRoute.value.fullPath);
+          // this.$router.push({ path: this.$router.currentRoute.value.fullPath || "/login" });
+        }
+      }
+    }
+  );
+
+export default axios.create({
+    baseURL: process.env.VUE_APP_API
+})
+
+// axios.defaults.headers.common['Authorization'] = localStorage.getItem("accessToken")?localStorage.getItem("accessToken"):null;
+</code></pre>
+</div></div>
+</body>
+</html>
